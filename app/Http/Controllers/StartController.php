@@ -24,15 +24,17 @@ class StartController extends Controller
     }
     public function post(Request $request){
         $param = ['title' => $request->title,
+            'name' => $request->name,
             'text' => $request->text,
 
         ];
         $validate_rule = [
           'title' =>'required','size:255',
+          'name'  =>'required','size:255',
           'text'  =>'required','size:1000',
         ];
         $this->validate($request, $validate_rule);
-        DB::insert('insert into articles (title,text) values(:title,:text)',$param);
+        DB::insert('insert into articles (title,name,text) values(:title,:name,:text)',$param);
         return view('start', ['msg'=>'正しく入力されました']);
     }
 

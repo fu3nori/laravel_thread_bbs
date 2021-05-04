@@ -24,16 +24,16 @@
     </ul>
 </div>
 @endif
-<form method="post" action="/start">
-    @csrf
-    タイトル<BR>
-    <input type="text" name="title" value="{{old('title')}}">
+{{Form::open(['url' => '/start', 'files' => true])}}
+{{Form::token()}}
+    {{Form::text('title', null, ['class' => 'form-control', 'id' => 'inputTitle', 'placeholder' => 'タイトル'])}}
     <br>
-    テキスト<BR>
-    <input type="text" name="text" value="{{old('text')}}">
+    {{Form::text('name', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => '氏名'])}}
     <br>
-    <input type="submit">
-</form>
+    {{Form::textarea('text', null, ['class' => 'form-control', 'id' => 'inputText', 'placeholder' => '本文'])}}
+    <br>
+    {{Form::submit('送信', ['class'=>'btn btn-primary btn-block'])}}
+{{Form::close()}}
 @endsection
 
 @section('footer')
