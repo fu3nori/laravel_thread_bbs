@@ -45,6 +45,18 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
+        pre.view{
+            width:300px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+
+        div.view {
+            width:300px;
+            border:solid 1px cadetblue;
+        }
+
     </style>
 </head>
 

@@ -5,7 +5,7 @@
 @section('title','index')
 @section('menubar')
     @parent
-    インデックスページ
+    インデックスページ <a href="/start/view">ビューページ</a> 管理ページ
 @endsection
 
 

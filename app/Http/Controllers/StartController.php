@@ -20,13 +20,12 @@ class StartController extends Controller
         $data = [
             'msg'=>'フォーム入力'
         ];
-        return view('/start',$data);
+        return view('/start/index',$data);
     }
     public function post(Request $request){
         $param = ['title' => $request->title,
             'name' => $request->name,
             'text' => $request->text,
-
         ];
         $validate_rule = [
           'title' =>'required','size:255',
@@ -35,8 +34,12 @@ class StartController extends Controller
         ];
         $this->validate($request, $validate_rule);
         DB::insert('insert into articles (title,name,text) values(:title,:name,:text)',$param);
-        return view('start', ['msg'=>'正しく入力されました']);
+        return view('/start/index', ['msg'=>'正しく入力されました']);
     }
 
+    public function view(){
+        $articles = Article::get()->toArray();
+        return view('/start/view', compact('articles'));
+    }
 
 }
