@@ -38,7 +38,8 @@ class StartController extends Controller
     }
 
     public function view(){
-        $articles = Article::get()->toArray();
+        // $articles = Article::get()->toArray();
+        $articles = Article::simplePaginate(5);
         return view('/start/view', compact('articles'));
     }
 

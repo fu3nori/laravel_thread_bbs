@@ -16,7 +16,10 @@
         <li>本文：</li><pre class="view">{{$article['text']}}</pre>
     </div>
 @endforeach
+    {{ $articles->links() }}
 @endsection
+
+
 
 @section('footer')
             2021
