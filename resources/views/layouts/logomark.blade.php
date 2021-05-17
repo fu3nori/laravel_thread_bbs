@@ -1,4 +1,4 @@
 
 @section('logomark')
-<img src="/img/logo.png">
+    <img src="{{asset('/img/logo.png')}}">
 @show
