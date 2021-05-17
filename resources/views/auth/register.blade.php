@@ -26,6 +26,7 @@
                         </div>
 
                         <!-- ロール -->
+                        @if($role == true)
                         <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
@@ -36,6 +37,7 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
                         <!-- ロール -->
 
                         <div class="form-group row">
