@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 Use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class AdminMiddleware
 {
     /**
@@ -16,9 +17,9 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        // ユーザー情報取得
         $user_id = Auth::id();
-        var_dump($user_id);
+        $role = DB::table('users')->where('id', $user_id)->value('role');
+        var_dump($role);
         /**
         foreach($user->roles as $role){
             // ロール値が100(Admin)ならアクセス可能
