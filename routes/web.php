@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Middleware\AdminMiddleware;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,3 +22,12 @@ Route::get('/start/view', 'StartController@view');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+// 管理者権限ミドルウェアで管理するページ
+Route::post('/admin', function () {
+    //
+})->middleware('admin');
+Route::get('/admin', function () {
+    //
+})->middleware('admin');
