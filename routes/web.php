@@ -25,9 +25,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // 管理者権限ミドルウェアで管理するページ
-Route::post('/admin', function () {
-    //
-})->middleware('admin');
-Route::get('/admin', function () {
-    //
-})->middleware('admin');
+
+
+Route::group(['middleware' => 'admin'], function() {
+    Route::get('/admin', 'AdminController@index');
+    Route::post('/admin', 'AdminController@index');
+});
