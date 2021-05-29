@@ -7,6 +7,15 @@ Laravelの基本的なCRUDをMINI BBS形式で実装したテンプレートで�
 ## テンプレート制作
 Fu3nori Usu1
 
+##　利用方法
+<p>ソースコード一式を開発環境にデプロイし、laravelのホーム画面が表示される事を確認します。</p>
+<p>laravel-test.sqlを任意のmysqlサーバに読み込ませ、DBを構築します。</p>
+<p>.envで利用するDBを設定します。</p>
+<p>ホーム画面からRegisterをクリックし、ユーザー登録画面に遷移し、ドロップダウンリストで管理者を選び、必要事項を入力してからユーザー登録して下さい。<BR>なお、管理者登録が出来るのは最初の1回だけですのでご注意ください。</p>
+<p>URLをfoovar(設置位置)/startとするとBBSの投稿画面が表示され、投稿が出来ます。</p>
+<p>管理者アカウントでログインしてからURLをfoovar(設置位置)/adminとすると、投稿された記事の編集や削除が出来ます</p>
+
+
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
