@@ -57,6 +57,11 @@
             border:solid 1px cadetblue;
         }
 
+        div_admin.view {
+            width:600px;
+            border:solid 1px cadetblue;
+        }
+
     </style>
 </head>
 
