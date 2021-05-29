@@ -23,12 +23,6 @@ class AdminController extends Controller
 
     public function edit(Request $request)
     {
-        $param = [
-            'id' => $request->id,
-            'title' => $request->title,
-            'name' => $request->name,
-            'text' => $request->text,
-        ];
         $validate_rule = [
             'id' => 'required',
             'title' => 'required', 'size:255',
@@ -36,11 +30,17 @@ class AdminController extends Controller
             'text' => 'required', 'size:1000',
         ];
         $this->validate($request, $validate_rule);
-        DB::table('articles')->where('id', $request->id)
-            ->update(['title' => $request->title,
-                'name'=>$request->name,
-                'text'=>$request->text]);
-        $msg='編集完了';
+        if ($request->delete== NULL) {
+            DB::table('articles')->where('id', $request->id)
+                ->update(['title' => $request->title,
+                    'name'=>$request->name,
+                    'text'=>$request->text]);
+            $msg='編集完了';
+        } elseif($request->delete== "0") {
+            DB::table('articles')->where('id', $request->id)->delete();
+            $msg='ID'.$request->id.'削除完了';
+        }
+
 
         $articles = Article::simplePaginate(5);
         return view('/admin/index', compact('articles','msg'));

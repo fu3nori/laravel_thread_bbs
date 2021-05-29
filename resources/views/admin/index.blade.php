@@ -13,6 +13,7 @@
             <li>ID:{{$article['id']}}</li>
             {{Form::open(['url' => '/admin/edit', 'files' => true])}}
             {{Form::token()}}
+            削除{{Form::checkbox('delete', '0', false)}}<br>
             {{Form::hidden('id', $article['id'])}}
             {{Form::text('name', $article['name'], ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => '氏名'])}}
             <br>
