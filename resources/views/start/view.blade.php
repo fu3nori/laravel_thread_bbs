@@ -3,7 +3,7 @@
 @section('title','view')
 @section('menubar')
     @parent
-    <a href="/start">インデックスページ</a> ビューページ 管理ページ
+    <a href= "{{ action('StartController@index') }}">インデックスページ</a> ビューページ 管理ページ
 @endsection
 @section('content')
     @include('layouts.logomark')
