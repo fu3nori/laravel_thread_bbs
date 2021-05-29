@@ -11,9 +11,6 @@ class StartController extends Controller
 {
     //index
     public function index(){
-        $articles = Article::first()->toArray();
-        var_dump($articles);
-        echo "<br>---<br>";
         if (Auth::check()) {
             echo "ログインしてます";
         }
