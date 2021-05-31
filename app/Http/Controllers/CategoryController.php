@@ -13,9 +13,16 @@ use mysql_xdevapi\Table;
 class CategoryController extends Controller
 {
     //
-    public function index(){
+    public function index($id){
+
         $categorys = Category::all();
         return view('/category/index',compact('categorys'));
+    }
+
+    public function view($id){
+        var_dump($id);
+        $data = null;
+        return view('/category/view',compact('data'));
     }
 
 }

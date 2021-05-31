@@ -22,8 +22,9 @@ Route::get('/start/view', 'StartController@view');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/category', 'CategoryController@index');
-
+// カテゴリID
+//Route::get('category/','CategoryController@index');
+Route::get('/category/view/{id}','CategoryController@view');
 // 管理者権限ミドルウェアで管理するページ
 
 
