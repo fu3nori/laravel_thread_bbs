@@ -20,9 +20,9 @@ Route::get('/start', 'StartController@index');
 Route::post('/start', 'StartController@post');
 Route::get('/start/view', 'StartController@view');
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/category', 'CategoryController@index');
 
 // 管理者権限ミドルウェアで管理するページ
 
