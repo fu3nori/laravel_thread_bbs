@@ -16,6 +16,11 @@ class BoardController extends Controller
 {
     //
     public function index($id){
+        $data =null;
+        return view('/board/index',compact('data'));
+    }
+    public function post(Request $request){
+        var_dump($request);
 
     }
 }
