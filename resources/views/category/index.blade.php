@@ -5,9 +5,7 @@
 
     @foreach($categorys as $category)
 
-            <li>ID：{{$category['id']}}</li>
-            <li><a href="{{ action('CategoryController@index', $category->id) }}">{{ $category->id }}</a></li>
-
+            <li><a href="{{ action('CategoryController@view', $category->id) }}">{{ $category->category }}</a></li>
     @endforeach
 @endsection
 
