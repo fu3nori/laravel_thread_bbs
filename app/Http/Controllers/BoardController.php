@@ -18,7 +18,11 @@ class BoardController extends Controller
 {
     //
     public function index($id){
-        return view('/board/index',compact('id'));
+        // スレッド一覧取得 TODO:1スレッド配列の中にレス配列が入る構造を考える
+        $threads = DB::table('bbs_threads')
+            ->join('bbs_responses','bbs_threads.id', '=', 'bbs_responses.thread_id')
+            ->get();
+        return view('/board/index',compact('id','threads'));
     }
     public function post(Request $request){
         // IP取得
@@ -61,6 +65,7 @@ class BoardController extends Controller
             DB::rollback();
         }
 
+        return redirect()->action('BoardController@index', ['id' =>$request->board_id ]);
 
     }
 }
