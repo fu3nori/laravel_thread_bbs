@@ -24,6 +24,4 @@
 {{Form::submit('送信', ['class'=>'btn btn-primary btn-block'])}}
 {{Form::close()}}
 <hr>
-@foreach($datas as $data)
-    {{var_dump($data)}}
-@endforeach
+
