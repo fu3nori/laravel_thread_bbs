@@ -23,13 +23,18 @@ class BoardController extends Controller
             ->get();
 
         // レスポンス一覧取得
+        $datas =[];
         foreach ($threads as $thread)
         {
-            $thread_collection = $thread;
+            $thread_collection = (array)$thread;
             $responses = DB::table('bbs_responses')
                 ->where('thread_id', '=', $thread->id)
                 ->get();
+
             $responses_collection = (array)$responses;
+
+
+
             $merged = array_merge($thread_collection, $responses_collection);
             array_push($datas,$merged);
         }
