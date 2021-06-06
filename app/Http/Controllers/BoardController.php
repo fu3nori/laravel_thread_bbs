@@ -9,7 +9,7 @@ use App\Models\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use mysql_xdevapi\Table;
+
 
 class BoardController extends Controller
 {
@@ -21,24 +21,21 @@ class BoardController extends Controller
             ->orderBy('updated_at', 'desc')
             ->limit(self::THREADS_PREVIEW)
             ->get();
+        $threads = json_decode(json_encode($threads), true);
 
+        $datas = array ();
         // レスポンス一覧取得
-        $datas =[];
         foreach ($threads as $thread)
         {
-            $thread_collection = (array)$thread;
             $responses = DB::table('bbs_responses')
-                ->where('thread_id', '=', $thread->id)
+                ->where('thread_id', '=', $thread['id'])
                 ->get();
+            $responses = json_decode(json_encode($responses), true);
 
-            $responses_collection = (array)$responses;
-
-
-
-            $merged = array_merge($thread_collection, $responses_collection);
-            array_push($datas,$merged);
+            $thread['responses']= $responses;
+            array_push($datas, $thread);
         }
-        $datas = json_decode(json_encode($datas), true);
+
         return view('/board/index',compact('id', 'datas'));
     }
     public function post(Request $request){

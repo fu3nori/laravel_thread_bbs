@@ -26,10 +26,9 @@
 <hr>
 
 @foreach($datas as $data)
-{{var_dump($data['thread'])}}
-    <?php // protectedデータにアクセスする為には"\0*\0"."items"と書く必要がある ?>
-    @foreach($data["\0*\0"."items"] as $response)
-        {{var_dump($response)}}
-    @endforeach
 
+    <h1>タイトル：   {{$data['thread']}}</h1>
+    @foreach($data['responses'] as $res)
+        <h3>{{$res['name']}}</h3>
+    @endforeach
 @endforeach
