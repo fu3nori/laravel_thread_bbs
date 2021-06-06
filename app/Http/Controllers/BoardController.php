@@ -30,10 +30,15 @@ class BoardController extends Controller
             $responses = DB::table('bbs_responses')
                 ->where('thread_id', '=', $thread->id)
                 ->get();
+
             $responses_collection = (array)$responses;
+
+
+
             $merged = array_merge($thread_collection, $responses_collection);
             array_push($datas,$merged);
         }
+        $datas = json_decode(json_encode($datas), true);
         return view('/board/index',compact('id', 'datas'));
     }
     public function post(Request $request){
