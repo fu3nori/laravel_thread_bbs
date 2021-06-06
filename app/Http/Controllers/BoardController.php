@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\Board;
 use App\Models\Thread;
 use App\Models\Response;
 use Illuminate\Support\Facades\Auth;
@@ -13,16 +11,30 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use mysql_xdevapi\Table;
 
-
 class BoardController extends Controller
 {
+    const THREADS_PREVIEW  = "10";
     //
     public function index($id){
-        // スレッド一覧取得 TODO:1スレッド配列の中にレス配列が入る構造を考える
+        // スレッド一覧取得
         $threads = DB::table('bbs_threads')
-            ->join('bbs_responses','bbs_threads.id', '=', 'bbs_responses.thread_id')
+            ->orderBy('updated_at', 'desc')
+            ->limit(self::THREADS_PREVIEW)
             ->get();
-        return view('/board/index',compact('id','threads'));
+
+        // レスポンス一覧取得
+        $datas =[];
+        foreach ($threads as $thread)
+        {
+            $thread_collection = (array)$thread;
+            $responses = DB::table('bbs_responses')
+                ->where('thread_id', '=', $thread->id)
+                ->get();
+            $responses_collection = (array)$responses;
+            $merged = array_merge($thread_collection, $responses_collection);
+            array_push($datas,$merged);
+        }
+        return view('/board/index',compact('id', 'datas'));
     }
     public function post(Request $request){
         // IP取得
