@@ -1,5 +1,12 @@
 <?php
 ?>
+@extends('layouts.board')
+
+@section('content')
+
+@section('title', 'スレッドプレビュー・スレッド作成')
+
+
 <p>スレッド作成</p>
 @if (count($errors) > 0)
     <div>
@@ -27,8 +34,13 @@
 
 @foreach($datas as $data)
 
-    <h1>タイトル：   {{$data['thread']}}</h1>
+    <h1>タイトル：{{$data['thread']}} 投稿日時：{{$data['created_at']}}</h1>
     @foreach($data['responses'] as $res)
-        <h3>{{$res['name']}}</h3>
+        <h3>氏名：{{$res['name']}} email：{{$res['email']}} 投稿時間{{$res['created_at']}}</h3>
+        <h3>投稿内容</h3>
+        <pre>{{$res['response']}}</pre>
+        {{$res['image1']}}{{$res['image2']}}
     @endforeach
 @endforeach
+
+@endsection
