@@ -1,5 +1,5 @@
-@extends('layouts.bbs')
-
+@extends('layouts.board')
+@section('title', 'カテゴリー選択')
 @section('content')
 
 

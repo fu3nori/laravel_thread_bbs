@@ -18,6 +18,7 @@ class BoardController extends Controller
     public function index($id){
         // スレッド一覧取得
         $threads = DB::table('bbs_threads')
+            ->where('board_id', $id)
             ->orderBy('updated_at', 'desc')
             ->limit(self::THREADS_PREVIEW)
             ->get();
