@@ -42,8 +42,6 @@ class BoardController extends Controller
     public function post(Request $request){
         // IP取得
         $request->merge(['ip' => $_SERVER["REMOTE_ADDR"]]);
-
-
         // バリデーション
         $validate_rule = [
             'thread' => 'required','size:255',
@@ -82,5 +80,44 @@ class BoardController extends Controller
 
         return redirect()->action('BoardController@index', ['id' =>$request->board_id ]);
 
+    }
+
+    public function res(Request $request){
+        $request->merge(['ip' => $_SERVER["REMOTE_ADDR"]]);
+        // バリデーション
+        $validate_rule = [
+            'thread_id' => 'required',
+            'name' => 'required','size:255',
+            'email' => 'present','email:strict,dns,spoof',
+            'response' => 'required','size:2048',
+            'ip' => 'required','ip'
+        ];
+        $this->validate($request,$validate_rule);
+
+        // トランザクション開始
+        DB::beginTransaction();
+        try {
+            // レスポンス書き込み
+            $response = new \App\Models\Response;
+            $response->	thread_id = $request->thread_id;
+            $response->	name = $request->name;
+            $response-> email = $request->email;
+            $response-> response = $request->response;
+            $response-> ip = $request->ip;
+            $response->save();
+
+            $count = Response::where('thread_id', $request->thread_id)->count();
+            // スレッドに件数書き込み
+            $thread = new \App\Models\Thread;
+            $thread->where('id', $request->thread_id)->update(['writes' => $count]);
+
+            // トランザクション終了
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
+
+
+        return redirect()->action('BoardController@index', ['id' =>$request->board_id ]);
     }
 }

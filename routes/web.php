@@ -28,6 +28,8 @@ Route::get('/category/view/{id}','CategoryController@view');
 Route::get('/category/','CategoryController@index');
 Route::get('/board/{id}','BoardController@index');
 Route::post('/board/post','BoardController@post');
+Route::post('/board/res','BoardController@res');
+
 // 管理者権限ミドルウェアで管理するページ
 
 
