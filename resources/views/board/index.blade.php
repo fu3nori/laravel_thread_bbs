@@ -17,7 +17,7 @@
         </ul>
     </div>
 @endif
-{{Form::open(['action' => 'BoardController@post'])}}
+{{Form::open(['action' => 'BoardController@post','method' => 'post', 'files' => true])}}
 {{Form::token()}}
 {{Form::hidden('board_id', $id)}}
 {{Form::text('thread', null, ['class' => 'form-control', 'id' => 'inputThread', 'placeholder' => 'タイトル'])}}
@@ -42,7 +42,7 @@
         {{$res['image1']}}{{$res['image2']}}
     @endforeach
     <h3>レス書き込み</h3>
-    {{Form::open(['action' => 'BoardController@res'])}}
+    {{Form::open(['action' => 'BoardController@res','method' => 'post', 'files' => true])}}
     {{Form::token()}}
     {{Form::hidden('board_id', $id)}}
     {{Form::hidden('thread_id', $data['id'])}}
