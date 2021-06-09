@@ -20,13 +20,20 @@
 {{Form::open(['action' => 'BoardController@post','method' => 'post', 'files' => true])}}
 {{Form::token()}}
 {{Form::hidden('board_id', $id)}}
-{{Form::text('thread', null, ['class' => 'form-control', 'id' => 'inputThread', 'placeholder' => 'タイトル'])}}
+
+
+タイトル：<br>{{Form::text('thread', null, ['class' => 'form-control', 'id' => 'inputThread', 'placeholder' => 'タイトル'])}}
 <br>
-{{Form::text('name', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => '氏名'])}}
+氏名：<br>{{Form::text('name', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => '氏名'])}}
 <br>
-{{Form::text('email', null, ['class' => 'form-control', 'id' => 'inputEmail', 'placeholder' => 'メール'])}}
+メール：<br>{{Form::text('email', null, ['class' => 'form-control', 'id' => 'inputEmail', 'placeholder' => 'メール'])}}
 <br>
-{{Form::textarea('response', null, ['class' => 'form-control', 'id' => 'inputText', 'placeholder' => '本文'])}}
+本文：<br>{{Form::textarea('response', null, ['class' => 'form-control', 'id' => 'inputText', 'placeholder' => '本文'])}}
+<br>
+画像１：<br>{{Form::file('image1', ['id' => 'image1'])}}
+<br>
+画像２：<br>{{Form::file('image2', ['id' => 'image1'])}}
+
 <br>
 {{Form::submit('送信', ['class'=>'btn btn-primary btn-block'])}}
 {{Form::close()}}
@@ -47,11 +54,15 @@
     {{Form::hidden('board_id', $id)}}
     {{Form::hidden('thread_id', $data['id'])}}
     <br>
-    {{Form::text('name', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => '氏名'])}}
+    氏名：<br>{{Form::text('name', null, ['class' => 'form-control', 'id' => 'inputName', 'placeholder' => '氏名'])}}
     <br>
-    {{Form::text('email', null, ['class' => 'form-control', 'id' => 'inputEmail', 'placeholder' => 'メール'])}}
+    メール：<br>{{Form::text('email', null, ['class' => 'form-control', 'id' => 'inputEmail', 'placeholder' => 'メール'])}}
     <br>
-    {{Form::textarea('response', null, ['class' => 'form-control', 'id' => 'inputText', 'placeholder' => '本文'])}}
+    本文：<br>{{Form::textarea('response', null, ['class' => 'form-control', 'id' => 'inputText', 'placeholder' => '本文'])}}
+    <br>
+    画像１：<br>{{Form::file('image1', ['id' => 'image1'])}}
+    <br>
+    画像２：<br>{{Form::file('image2', ['id' => 'image1'])}}
     <br>
     {{Form::submit('送信', ['class'=>'btn btn-primary btn-block'])}}
     {{Form::close()}}
