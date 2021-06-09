@@ -9,7 +9,7 @@ use App\Models\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
+use App\Library\UserFunction; // ユーザー関数呼出　2021/06/10
 
 class BoardController extends Controller
 {
@@ -53,6 +53,13 @@ class BoardController extends Controller
             'image2' => 'image|file|mimes:jpeg,png,jpg,gif|max:5120|dimensions:max_width=1600,max_height=1440',
         ];
         $this->validate($request,$validate_rule);
+        // 画像加工開始
+        if ($request->image1 == true){
+            $image_array = UserFunction::ImageTrance($request->image1);
+            var_dump($image_array);
+            exit;
+        }
+
         // トランザクション開始
         DB::beginTransaction();
         try {

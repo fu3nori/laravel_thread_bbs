@@ -225,7 +225,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'UserFunction' =>App\Library\UserFunction::class, //ユーザー関数　追加3032/06/10
     ],
 
 ];
