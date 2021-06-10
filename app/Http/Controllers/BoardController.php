@@ -13,7 +13,9 @@ use App\Library\UserFunction; // ユーザー関数呼出　2021/06/10
 
 class BoardController extends Controller
 {
-    const THREADS_PREVIEW  = "10";
+    const THREADS_PREVIEW  = "10";// 同時表示スレッド数
+    const IMAGE_ONE ="_1"; // 一枚目の投稿画像接尾句
+    const IMAGE_TWO ="_2"; // 二枚目の投稿画像接尾句
     //
     public function index($id){
         // スレッド一覧取得
@@ -57,11 +59,11 @@ class BoardController extends Controller
         $image_name1 = null;
         $image_name2 = null;
         if ($request->image1 == true){
-            $image_name1 = UserFunction::ImageTrance($request->image1);
+            $image_name1 = UserFunction::ImageTrance($request->image1, self::IMAGE_ONE);
         }
 
         if ($request->image2 == true){
-            $image_name2 = UserFunction::ImageTrance($request->image2);
+            $image_name2 = UserFunction::ImageTrance($request->image2, self::IMAGE_TWO);
         }
 
         // トランザクション開始
@@ -116,11 +118,11 @@ class BoardController extends Controller
         $image_name1 = null;
         $image_name2 = null;
         if ($request->image1 == true){
-            $image_name1 = UserFunction::ImageTrance($request->image1);
+            $image_name1 = UserFunction::ImageTrance($request->image1, self::IMAGE_ONE);
         }
 
         if ($request->image2 == true){
-            $image_name2 = UserFunction::ImageTrance($request->image2);
+            $image_name2 = UserFunction::ImageTrance($request->image2, self::IMAGE_TWO);
         }
 
         // トランザクション開始

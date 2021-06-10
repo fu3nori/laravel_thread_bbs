@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Storage;
 
 class UserFunction
 {
-    const THUMB_WIDTH = 600; //サムネの幅は600とする
-    public static function ImageTrance($image)
+    const THUMB_WIDTH = 400; //サムネの幅は600とする
+    public static function ImageTrance($image, $suffix)
     {
 
         // オリジナル画像に名前をつける
-        $file_name = time().'.'.$image->getClientOriginalExtension();
+        $file_name = time().$suffix.'.'.$image->getClientOriginalExtension();
 
         // オリジナル画像を public/bbs_imageにコピー
         $image->move(

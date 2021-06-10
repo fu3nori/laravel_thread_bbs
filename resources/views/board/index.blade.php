@@ -46,7 +46,12 @@
         <h3>氏名：{{$res['name']}} email：{{$res['email']}} 投稿時間{{$res['created_at']}}</h3>
         <h3>投稿内容</h3>
         <pre>{{$res['response']}}</pre>
-        {{$res['image1']}}{{$res['image2']}}
+        @if ($res['image1']==true)
+        <img src="{{ asset('bbs_thumb/'.$res['image1'])}}">
+        @endif
+        @if ($res['image2']==true)
+        <img src=" {{ asset('bbs_thumb/'.$res['image2'])}}">
+        @endif
     @endforeach
     <h3>レス書き込み</h3>
     {{Form::open(['action' => 'BoardController@res','method' => 'post', 'files' => true])}}
