@@ -41,16 +41,20 @@
 
 @foreach($datas as $data)
 
-    <h1>タイトル：{{$data['thread']}} 投稿日時：{{$data['created_at']}}  スレッドID：{{$data['id']}}</h1>
+    <h1>タイトル：{{$data['thread']}} 投稿日時：{{$data['created_at']}}  スレッドID：{{$data['id']}}　件数：{{$data['writes']}}</h1>
     @foreach($data['responses'] as $res)
-        <h3>氏名：{{$res['name']}} email：{{$res['email']}} 投稿時間{{$res['created_at']}}</h3>
+        <h3>氏名：<a href="mailto:{{$res['email']}}">{{$res['name']}}</a>　投稿時間：{{$res['created_at']}}</h3>
         <h3>投稿内容</h3>
         <pre>{{$res['response']}}</pre>
         @if ($res['image1']==true)
-        <img src="{{ asset('bbs_thumb/'.$res['image1'])}}">
+            <a href="{{ asset('bbs_image/'.$res['image1'])}}" target="_blank">
+                <img src="{{ asset('bbs_thumb/'.$res['image1'])}}">
+            </a>
         @endif
         @if ($res['image2']==true)
-        <img src=" {{ asset('bbs_thumb/'.$res['image2'])}}">
+            <a href="{{ asset('bbs_image/'.$res['image2'])}}" target="_blank">
+                <img src=" {{ asset('bbs_thumb/'.$res['image2'])}}">
+            </a>
         @endif
     @endforeach
     <h3>レス書き込み</h3>
