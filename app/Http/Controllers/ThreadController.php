@@ -14,4 +14,19 @@ use App\Library\UserFunction; // ユーザー関数呼出　2021/06/10
 class ThreadController extends Controller
 {
     //
+    public function list($id)
+    {
+
+    }
+
+    public function view($id)
+    {
+
+    }
+
+    public function post(Request $request)
+    {
+
+    }
+
 }

@@ -34,7 +34,8 @@ Route::post('/board/res','BoardController@res');
 // スレ一覧・スレ単独表示
 Route::get('/thread/list/{id}','ThreadController@list');
 Route::get('/thread/view/{id}','ThreadController@view');
-
+// スレ単独から投稿
+Route::post('/thread/post','ThreadController@post');
 
 // 管理者権限ミドルウェアで管理するページ
 
