@@ -54,10 +54,14 @@ class BoardController extends Controller
         ];
         $this->validate($request,$validate_rule);
         // 画像加工開始
+        $image_name1 = null;
+        $image_name2 = null;
         if ($request->image1 == true){
-            $image_array = UserFunction::ImageTrance($request->image1);
-            var_dump($image_array);
-            exit;
+            $image_name1 = UserFunction::ImageTrance($request->image1);
+        }
+
+        if ($request->image2 == true){
+            $image_name2 = UserFunction::ImageTrance($request->image2);
         }
 
         // トランザクション開始
@@ -78,6 +82,10 @@ class BoardController extends Controller
             $response->	name = $request->name;
             $response-> email = $request->email;
             $response-> response = $request->response;
+            $response-> image1 = $image_name1;
+            $response-> image2 = $image_name2;
+            $response-> thumb1 = $image_name1;
+            $response-> thumb2 = $image_name2;
             $response-> ip = $request->ip;
             $response->save();
             // トランザクション終了
@@ -104,6 +112,16 @@ class BoardController extends Controller
             'image2' => 'image|file|mimes:jpeg,png,jpg,gif|max:5120|dimensions:max_width=1600,max_height=1440',
         ];
         $this->validate($request,$validate_rule);
+        // 画像加工開始
+        $image_name1 = null;
+        $image_name2 = null;
+        if ($request->image1 == true){
+            $image_name1 = UserFunction::ImageTrance($request->image1);
+        }
+
+        if ($request->image2 == true){
+            $image_name2 = UserFunction::ImageTrance($request->image2);
+        }
 
         // トランザクション開始
         DB::beginTransaction();
@@ -114,6 +132,10 @@ class BoardController extends Controller
             $response->	name = $request->name;
             $response-> email = $request->email;
             $response-> response = $request->response;
+            $response-> image1 = $image_name1;
+            $response-> image2 = $image_name2;
+            $response-> thumb1 = $image_name1;
+            $response-> thumb2 = $image_name2;
             $response-> ip = $request->ip;
             $response->save();
 
