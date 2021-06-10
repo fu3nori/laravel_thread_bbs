@@ -26,9 +26,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('category/','CategoryController@index');
 Route::get('/category/view/{id}','CategoryController@view');
 Route::get('/category/','CategoryController@index');
+// 板ID
 Route::get('/board/{id}','BoardController@index');
 Route::post('/board/post','BoardController@post');
 Route::post('/board/res','BoardController@res');
+
+// スレ一覧・スレ単独表示
+Route::get('/thread/list/{id}','ThreadController@list');
+Route::get('/thread/view/{id}','ThreadController@view');
+
 
 // 管理者権限ミドルウェアで管理するページ
 
