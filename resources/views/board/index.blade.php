@@ -4,9 +4,10 @@
 
 @section('content')
 
-@section('title', 'スレッドプレビュー・スレッド作成')
+@section('title', $board_name.'掲示板　スレッドプレビュー・スレッド作成')
 
-
+<h1>{{$board_name.'掲示板'}}</h1>
+<b><a href= "{{ action('ThreadController@list',[$id]) }}">スレッド一覧</a></b>
 <p>スレッド作成</p>
 @if (count($errors) > 0)
     <div>

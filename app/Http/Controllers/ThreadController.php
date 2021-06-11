@@ -16,12 +16,29 @@ class ThreadController extends Controller
     //
     public function list($id)
     {
-
+        $threads = DB::table('bbs_threads')
+            ->where('board_id',$id)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+        $threads = json_decode(json_encode($threads), true);
+        return view('/thread/list', compact('threads'));
     }
 
     public function view($id)
     {
+        // スレッドタイトル・カウント取得
+        $thread = DB::table('bbs_threads')
+            ->where('id', $id)
+            ->select('thread', 'writes')
+            ->first();
+        $thread = json_decode(json_encode($thread), true);
 
+        // レスポンス取得
+        $responses = DB::table('bbs_responses')
+            ->where('thread_id', $id)
+            ->get();
+        $responses = json_decode(json_encode($responses), true);
+        return view('/thread/view', compact('thread','responses'));
     }
 
     public function post(Request $request)

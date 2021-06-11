@@ -18,6 +18,13 @@ class BoardController extends Controller
     const IMAGE_TWO ="_2"; // 二枚目の投稿画像接尾句
     //
     public function index($id){
+        // 板名取得
+        $board = DB::table('bbs_boards')
+            ->select('board')
+            ->where('id',$id)
+            ->first();
+        $board_name =$board->board;
+
         // スレッド一覧取得
         $threads = DB::table('bbs_threads')
             ->where('board_id', $id)
@@ -39,7 +46,7 @@ class BoardController extends Controller
             array_push($datas, $thread);
         }
 
-        return view('/board/index',compact('id', 'datas'));
+        return view('/board/index',compact('id', 'datas', 'board_name'));
     }
     public function post(Request $request){
         // IP取得
