@@ -1,2 +1,8 @@
 .idea/php.xml
 .idea/workspace.xml
+.idea/laravel-test.iml
+.idea/php.xml
+.idea/workspace.xml
+public/bbs_image/
+public/bbs_thumb/
+
