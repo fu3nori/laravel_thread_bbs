@@ -7,7 +7,9 @@
 @section('title', $board_name.'掲示板　スレッドプレビュー・スレッド作成')
 
 <h1>{{$board_name.'掲示板'}}</h1>
-<b><a href= "{{ action('ThreadController@list',[$id]) }}">スレッド一覧</a></b>
+<h2><a href= "{{ action('ThreadController@list',[$id]) }}">スレッド一覧</a>　｜　<a href=" {{action('CategoryController@index')}}">カテゴリ一覧</a> </h2>
+
+
 <p>スレッド作成</p>
 @if (count($errors) > 0)
     <div>

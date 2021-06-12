@@ -29,7 +29,7 @@ class ThreadController extends Controller
         // スレッドタイトル・カウント取得
         $thread = DB::table('bbs_threads')
             ->where('id', $id)
-            ->select('thread', 'writes')
+            ->select('id','board_id','thread', 'writes')
             ->first();
         $thread = json_decode(json_encode($thread), true);
 
