@@ -45,4 +45,6 @@ Route::group(['middleware' => 'admin'], function() {
     Route::post('/admin', 'AdminController@index');
     Route::post('/admin/edit', 'AdminController@edit');
     Route::get('/admin/edit', 'AdminController@edit');
+    Route::get('/thread_admin' , 'ThreadAdminController@index');
+
 });

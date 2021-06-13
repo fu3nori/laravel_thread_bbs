@@ -53,6 +53,11 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
+                                {{--ロールが100の時はAdminへのリンクを張る--}}
+                                @if (Auth::user()->role == Config::get('const.ADMIN_ROLE'))
+
+                                <li><a href="{{ action('ThreadAdminController@index') }}">管理メニュー</a></li>
+                                @endif
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
