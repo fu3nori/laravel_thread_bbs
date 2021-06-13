@@ -31,8 +31,8 @@ class ThreadAdminController extends Controller
 
             // カテゴリー名バリデーション
             $validate_rule = [
-                'category_' => 'required','size:255',
-                'sort_' => 'integer',
+                'category' => 'required','size:255',
+                'sort' => 'integer',
             ];
             $this->validate($request,$validate_rule);
             // カテゴリ書き込み
@@ -57,8 +57,19 @@ class ThreadAdminController extends Controller
         // カテゴリ編集
         if($request->isMethod('POST') && $request['delete'] != 1 && $request['method'] != 'insert')
         {
+            $category_key = 'category'.$request['id'];
+            $sort_key = 'sort'.$request['id'];
             // カテゴリー編集バリデーション
-
+            $validate_rule = [
+                $category_key => 'required','size:255',
+                $sort_key => 'integer',
+            ];
+            $this->validate($request,$validate_rule);
+            // カテゴリ編集
+            DB::table('bbs_categorys')->where('id', $request->id)
+                ->update(['category' => $request->$category_key,
+                    'sort'=>$request->$sort_key]);
+            $msg='編集完了';
         }
 
         $categorys = DB::table('bbs_categorys')
