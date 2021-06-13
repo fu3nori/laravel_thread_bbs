@@ -15,20 +15,32 @@
 
 {{Form::text('category', null, ['class' => 'form-control', 'id' => 'inputCategory', 'placeholder' => 'カテゴリー名'])}}<br>
 ソート優先度(0が最優先、数値が上がるごとに後になる)：<br>
-{{Form::text('sort', null, ['class' => 'form-control', 'id' => 'inputCategory', 'placeholder' => 'ソート順'])}}<br>
+{{Form::text('sort', 0, ['class' => 'form-control', 'id' => 'inputCategory', 'placeholder' => 'ソート順'])}}<br>
 
 {{Form::submit('新規作成', ['class'=>'btn btn-primary btn-block'])}}
 {{Form::close()}}
 <hr>
 
-
-
 <h2>カテゴリー更新</h2>
+
+{{--システムメッセージ--}}
+<p>{{$msg}}</p>
+@if (count($errors) > 0)
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 @foreach($categorys as $category)
     カテゴリー名：{{$category['category']}}<br>
     {{Form::open(['url' => '/thread_admin/category'])}}
     {{Form::token()}}
-    削除{{Form::checkbox('delete', '0', false)}}<br>
+    削除{{Form::checkbox('delete', '1', false)}}<br>
     {{Form::hidden('id', $category['id'])}}
     {{--ここからのpostは更新になる--}}
     {{Form::hidden('method', 'update')}}

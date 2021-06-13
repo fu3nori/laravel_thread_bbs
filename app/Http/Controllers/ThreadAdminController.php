@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Category;
 
 class ThreadAdminController extends Controller
 {
@@ -22,17 +23,44 @@ class ThreadAdminController extends Controller
 
     public function category(Request $request)
     {
-        // POSTだったらこっちの処理
-        if($request->isMethod('POST'))
+        $msg = "カテゴリー管理";
+
+        // カテゴリー新規作成
+        if($request->isMethod('POST') && $request['method'] == 'insert')
         {
-            return ('POSTだよー');
+
+            // カテゴリー名バリデーション
+            $validate_rule = [
+                'category' => 'required','size:255',
+            ];
+            $this->validate($request,$validate_rule);
+            // カテゴリ書き込み
+            $category = new \App\Models\Category;
+            $category->category = $request->category;
+            $category->sort = $request->sort;
+            $category->save();
+            $msg=$request->category.'追加完了';
+        }
+        // カテゴリ削除
+        if($request->isMethod('POST') && $request['delete'] == 1)
+        {
+
+            // カテゴリーIDバリデーション
+            $validate_rule = [
+                'category' => 'required',
+               // 'id' => 'required','size:255','integer',
+            ];
+            $this->validate($request,$validate_rule);
+            DB::table('bbs_categorys')->where('id', $request->id)->delete();
+            $msg=$request->category.'削除完了';
+
         }
 
         $categorys = DB::table('bbs_categorys')
             ->orderBy('sort', 'desc')
             ->get();
         $categorys = json_decode(json_encode($categorys), true);
-        return view('thread_admin.category', compact('categorys'));
+        return view('thread_admin.category', compact('categorys','msg'));
     }
 
 }
