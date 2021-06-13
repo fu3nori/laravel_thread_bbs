@@ -15,7 +15,7 @@
 {{Form::hidden('method', 'insert')}}
 
 {{Form::text('category', null, ['class' => 'form-control', 'id' => 'inputCategory', 'placeholder' => 'カテゴリー名'])}}<br>
-ソート優先度(0が最優先、数値が上がるごとに後になる)：<br>
+ソート優先度(半角整数入力　0が最優先、数値が上がるごとに後になる)：<br>
 {{Form::text('sort', 0, ['class' => 'form-control', 'id' => 'inputCategory', 'placeholder' => 'ソート順'])}}<br>
 
 {{Form::submit('新規作成', ['class'=>'btn btn-primary btn-block'])}}
@@ -50,7 +50,7 @@
     {{Form::hidden('method', 'update')}}
 
     {{Form::text('category'.$category['id'], $category['category'], ['class' => 'form-control', 'id' => 'inputCategory'.$i, 'placeholder' => 'カテゴリー名'])}}<br>
-    ソート優先度(0が最優先、数値が上がるごとに後になる)：{{$category['sort']}}<br>
+    ソート優先度(半角整数入力　0が最優先、数値が上がるごとに後になる)：{{$category['sort']}}<br>
     {{Form::text('sort'.$category['id'], $category['sort'], ['class' => 'form-control', 'id' => 'inputCategory'.$i, 'placeholder' => 'ソート順'])}}<br>
 
     {{Form::submit('更新', ['class'=>'btn btn-primary btn-block'])}}
