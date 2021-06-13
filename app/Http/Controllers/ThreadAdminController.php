@@ -17,7 +17,22 @@ class ThreadAdminController extends Controller
 
     public function index()
     {
-        return ("管理人です");
+        return view('/thread_admin.index');
+    }
+
+    public function category(Request $request)
+    {
+        // POSTだったらこっちの処理
+        if($request->isMethod('POST'))
+        {
+            return ('POSTだよー');
+        }
+
+        $categorys = DB::table('bbs_categorys')
+            ->orderBy('sort', 'desc')
+            ->get();
+        $categorys = json_decode(json_encode($categorys), true);
+        return view('thread_admin.category', compact('categorys'));
     }
 
 }
