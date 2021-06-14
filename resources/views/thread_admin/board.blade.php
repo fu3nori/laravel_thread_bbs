@@ -4,11 +4,23 @@
 
 @section('title', 'カテゴリ配下掲示板管理メニュー')
 @section('content')
+    {{--システムメッセージ--}}
+    <p>{{$msg}}</p>
+    @if (count($errors) > 0)
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <h1>カテゴリ配下掲示板管理メニュー</h1>
     <p>カテゴリを選んで掲示板を作成します。また、過去に作った掲示板を削除できます。</p>
     {{Form::open(['url' => '/thread_admin/board'])}}
     <h2>カテゴリー選択</h2>
-    {{Form::select('id', $lists, null) }}<br>
+    {{Form::select('category_id', $lists, null) }}<br>
     <h2>掲示板名</h2>
     {{--ここからのpostは新規作成になる--}}
     {{Form::hidden('method', 'insert')}}
