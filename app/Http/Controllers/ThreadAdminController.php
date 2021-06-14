@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
+use App\Models\Board;
 
 class ThreadAdminController extends Controller
 {
@@ -77,6 +78,18 @@ class ThreadAdminController extends Controller
             ->get();
         $categorys = json_decode(json_encode($categorys), true);
         return view('thread_admin.category', compact('categorys','msg'));
+    }
+    public function board(Request $request){
+        $msg = "カテゴリー別板追加";
+        // 板一覧取得
+        $boards = DB::table('bbs_boards')->orderBy('sort', 'desc')->get();
+        $boards = json_decode(json_encode($boards), true);
+
+
+        // セレクトボタン
+        $lists = Category::pluck('category', 'id');
+
+        return view('thread_admin.board', compact('boards','lists',  'msg'));
     }
 
 }
