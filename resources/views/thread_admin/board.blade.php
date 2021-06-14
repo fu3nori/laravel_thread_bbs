@@ -33,12 +33,18 @@
     <hr>
     <h1>掲示板削除</h1>
     <p><b>警告：掲示板を削除すると、掲示板内全てのスレッドと書き込みも物理削除されます</b></p>
-    {{Form::open(['url' => '/thread_admin/board'])}}
+
     {{--ここからは削除--}}
-    {{Form::hidden('method', 'delete')}}
+
     @foreach($boards as $board)
+        {{Form::open(['url' => '/thread_admin/board'])}}
+        {{Form::hidden('method', 'delete')}}
+        {{Form::hidden('board', $board['board'])}}
+        {{Form::hidden('id', $board['id'])}}
         <p>掲示板名：{{$board['board']}}<br>
         掲示板ID：{{$board['id']}}</p>
+        {{Form::submit('掲示板削除', ['class'=>'btn btn-primary btn-block'])}}
+        {{Form::close()}}
     @endforeach
     {{Form::close()}}
 @endsection

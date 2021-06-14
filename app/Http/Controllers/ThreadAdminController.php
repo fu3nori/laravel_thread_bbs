@@ -82,10 +82,10 @@ class ThreadAdminController extends Controller
     public function board(Request $request){
         $msg = "カテゴリー別板追加";
 
-        // カテゴリー新規作成
+        // 板新規作成
         if($request->isMethod('POST') && $request['method'] == 'insert')
         {
-            // カテゴリー名バリデーション
+            // 板情報バリデーション
             $validate_rule = [
                 'board' => 'required','size:255',
                 'sort' => 'integer'
@@ -99,38 +99,13 @@ class ThreadAdminController extends Controller
             $board->save();
             $msg=$request->board.'追加完了';
         }
-        // カテゴリ削除
-        if($request->isMethod('POST') && $request['delete'] == 1)
+        // 板削除
+        elseif($request->isMethod('POST') && $request['method'] == 'delete')
         {
-            // カテゴリーIDバリデーション
-            $validate_rule = [
-                'category' => 'required',
-                'id' => 'required','size:255','integer',
-            ];
-            $this->validate($request,$validate_rule);
-            DB::table('bbs_categorys')->where('id', $request->id)->delete();
-            $msg=$request->category.'削除完了';
+            DB::table('bbs_boards')->where('id', $request->id)->delete();
+            $msg=$request->board.'削除完了';
+
         }
-        // カテゴリ編集
-        if($request->isMethod('POST') && $request['delete'] != 1 && $request['method'] != 'insert')
-        {
-            $category_key = 'category'.$request['id'];
-            $sort_key = 'sort'.$request['id'];
-            // カテゴリー編集バリデーション
-            $validate_rule = [
-                $category_key => 'required','size:255',
-                $sort_key => 'integer',
-            ];
-            $this->validate($request,$validate_rule);
-            // カテゴリ編集
-            DB::table('bbs_categorys')->where('id', $request->id)
-                ->update(['category' => $request->$category_key,
-                    'sort'=>$request->$sort_key]);
-            $msg='編集完了';
-        }
-
-
-
 
         // 板一覧取得
         $boards = DB::table('bbs_boards')->orderBy('sort', 'desc')->get();
