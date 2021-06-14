@@ -16,12 +16,12 @@ class CategoryController extends Controller
     //
     public function index(){
 
-        $categorys = Category::all();
+        $categorys = Category::OrderBy('sort', 'asc')->get();
         return view('/category/index',compact('categorys'));
     }
 
     public function view($id){
-        $boards = Board::where("category_id", $id)->get();
+        $boards = Board::where("category_id", $id)->OrderBy('sort', 'asc')->get();
 
         return view('/category/view',compact('boards'));
     }

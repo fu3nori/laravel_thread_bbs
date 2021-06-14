@@ -4,6 +4,8 @@
 
 @section('title', 'カテゴリ別掲示板管理メニュー')
 @section('content')
+    <h1>カテゴリ別掲示板管理メニュー</h1>
+
     {{Form::open(['url' => '/thread_admin/board'])}}
     <h1>カテゴリー選択</h1>
     {{Form::select('category_id', $lists, null) }}<br>
