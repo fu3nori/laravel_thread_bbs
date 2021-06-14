@@ -102,9 +102,14 @@ class ThreadAdminController extends Controller
         // 板削除
         elseif($request->isMethod('POST') && $request['method'] == 'delete')
         {
-            DB::table('bbs_boards')->where('id', $request->id)->delete();
-            $msg=$request->board.'削除完了';
+            // 板追従スレッド削除
 
+            // 板追従レス削除
+
+            DB::table('bbs_boards')
+                ->where('bbs_boards.id', $request->id)
+                ->delete();
+            $msg=$request->board.'削除完了';
         }
 
         // 板一覧取得
