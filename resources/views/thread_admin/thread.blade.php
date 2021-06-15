@@ -18,4 +18,6 @@
 @endif
     <h1>スレッド管理</h1>
 
+    
+
 @endsection
