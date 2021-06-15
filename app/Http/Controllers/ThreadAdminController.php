@@ -134,8 +134,12 @@ class ThreadAdminController extends Controller
     {
         $msg = "スレッド管理";
 
-        $threads = DB::table('bbs_threads')->get();
+        $threads = DB::table('bbs_boards')
+            ->leftJoin('bbs_threads', 'bbs_boards.id', '=', 'bbs_threads.board_id')
+            ->orderBy('bbs_threads.board_id', 'desc')
+            ->get();
         $threads = json_decode(json_encode($threads), true);
+
 
 
 
