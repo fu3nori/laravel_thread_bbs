@@ -10,5 +10,9 @@
 
 <h2><a href="{{action("ThreadAdminController@category")}}">カテゴリ管理</a></h2>
 <h2><a href="{{action("ThreadAdminController@board")}}">カテゴリ配下掲示板管理</a></h2>
-<h2>スレッド・レス管理</h2>
+<h2><a href="{{action("ThreadAdminController@response")}}">スレッド・レス管理</a></h2>
+<h2><a href="{{action("HomeController@index")}}">ホームに戻る</a>
+
 @endsection
+
+

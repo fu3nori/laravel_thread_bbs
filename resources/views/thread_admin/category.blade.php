@@ -4,7 +4,7 @@
 
 @section('title', 'カテゴリ管理メニュー')
 @section('content')
-
+@include('layouts.admin_menu')
 <p>入力ミスでエラーが出た場合はリロードボタンをクリックしてください</p>
 <h1>カテゴリー管理</h1>
 <h2>カテゴリー新規作成</h2>

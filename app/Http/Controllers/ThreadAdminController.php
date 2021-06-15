@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Board;
+use App\Models\Thread;
 
 class ThreadAdminController extends Controller
 {
@@ -102,7 +103,6 @@ class ThreadAdminController extends Controller
         // 板削除
         elseif($request->isMethod('POST') && $request['method'] == 'delete')
         {
-            // 板追従スレッド削除
             $param = [
                 'id' => $request->id
             ];
@@ -128,6 +128,17 @@ class ThreadAdminController extends Controller
         // セレクトボタン生成
         $lists = Category::pluck('category', 'id');
         return view('thread_admin.board', compact('boards','lists',  'msg'));
+    }
+
+    public function response(Request $request)
+    {
+        $msg = "スレッド・レス管理";
+
+        $threads = null;
+
+
+
+        return view('thread_admin.response',compact('threads', 'msg'));
     }
 
 }

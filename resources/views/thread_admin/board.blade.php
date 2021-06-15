@@ -4,6 +4,7 @@
 
 @section('title', 'カテゴリ配下掲示板管理メニュー')
 @section('content')
+    @include('layouts.admin_menu')
     {{--システムメッセージ--}}
     <p>{{$msg}}</p>
     @if (count($errors) > 0)
