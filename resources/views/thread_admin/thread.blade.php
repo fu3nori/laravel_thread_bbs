@@ -16,5 +16,6 @@
         </ul>
     </div>
 @endif
-    <h1>スレッド・レス管理</h1>
+    <h1>スレッド管理</h1>
+
 @endsection

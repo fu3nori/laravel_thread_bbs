@@ -130,15 +130,15 @@ class ThreadAdminController extends Controller
         return view('thread_admin.board', compact('boards','lists',  'msg'));
     }
 
-    public function response(Request $request)
+    public function thread(Request $request)
     {
-        $msg = "スレッド・レス管理";
+        $msg = "スレッド管理";
 
         $threads = null;
 
 
 
-        return view('thread_admin.response',compact('threads', 'msg'));
+        return view('thread_admin.thread',compact('threads', 'msg'));
     }
 
 }
