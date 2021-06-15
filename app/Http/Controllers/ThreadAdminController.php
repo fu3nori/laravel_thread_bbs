@@ -103,12 +103,21 @@ class ThreadAdminController extends Controller
         elseif($request->isMethod('POST') && $request['method'] == 'delete')
         {
             // 板追従スレッド削除
+            $param = [
+                'id' => $request->id
+            ];
+            DB::delete('DELETE `bbs_boards` , `bbs_threads` , `bbs_responses`
+            from bbs_boards LEFT JOIN bbs_threads ON bbs_boards.id = bbs_threads.board_id
+            RIGHT JOIN bbs_responses ON bbs_responses.thread_id = bbs_threads.id
+            where bbs_boards.id =:id', $param);
 
-            // 板追従レス削除
+            /**
+            DELETE `bbs_boards` , `bbs_threads` , `bbs_responses`
+            from `bbs_boards` LEFT JOIN `bbs_threads` ON `bbs_boards`.`id` = `bbs_threads`.`board_id`
+            RIGHT JOIN `bbs_responses` ON `bbs_responses`.`thread_id` = `bbs_threads`.`id` where `bbs_boards`.`id`=10;
+            **/
 
-            DB::table('bbs_boards')
-                ->where('bbs_boards.id', $request->id)
-                ->delete();
+
             $msg=$request->board.'削除完了';
         }
 
