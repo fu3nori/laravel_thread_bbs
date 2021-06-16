@@ -94,7 +94,7 @@ class ThreadAdminController extends Controller
             ];
             $this->validate($request,$validate_rule);
             // カテゴリ書き込み
-            $board = new \App\Models\board;
+            $board = new \App\Models\Board;
             $board->category_id = $request->category_id;
             $board->board = $request->board;
             $board->sort = $request->sort;
