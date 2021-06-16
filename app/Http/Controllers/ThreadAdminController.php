@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use App\Models\Board;
 use App\Models\Thread;
+use App\Models\Response;
 
 class ThreadAdminController extends Controller
 {
@@ -153,8 +154,55 @@ class ThreadAdminController extends Controller
 
         return view('thread_admin.thread',compact('threads', 'msg'));
     }
-    public function thread_res(Request $request)
+    public function threadres($id)
     {
+        $msg = 'スレッド配下レス削除';
+        // スレッド取得
+        // スレッドタイトル・カウント取得
+        $thread = DB::table('bbs_threads')
+            ->where('id', $id)
+            ->select('id','board_id','thread', 'writes')
+            ->first();
+        $thread = json_decode(json_encode($thread), true);
 
+        // レスポンス取得
+        $responses = DB::table('bbs_responses')
+            ->where('thread_id', $id)
+            ->get();
+        $responses = json_decode(json_encode($responses), true);
+        return view('/thread_admin/threadres' , compact('id','thread','responses', 'msg'));
+    }
+    public function deleteres(Request $request)
+    {
+        // 書き込み削除
+        // 残りレス件数チェック
+
+        $res_count = Response::where('thread_id', $request->thread_id)->get()->count();
+
+
+        // 残り件数が1だったらレス削除と共にスレッドも削除してメニューに遷移
+        if ($res_count == 1){
+            // トランザクション開始
+            DB::beginTransaction();
+            try {
+
+                // スレッド削除
+                Thread::where('id', $request->thread_id)->delete();
+                // レスポンス削除
+                Response::where('id',$request->response_id)->delete();
+                    // トランザクション終了
+                    DB::commit();
+                } catch (\Exception $e) {
+                DB::rollback();
+            }
+            $msg = '該当スレッドの書き込みは全て無くなったのでレスとスレッドが削除されました';
+            return view('/thread_admin/index',compact('msg'));
+        } else {
+            //レスポンス削除
+            Response::where('id',$request->response_id)->delete();
+            $msg = 'レスを削除しました';
+            return view('/thread_admin/index',compact('msg'));
+        }
+        return ("削除完了");
     }
 }
