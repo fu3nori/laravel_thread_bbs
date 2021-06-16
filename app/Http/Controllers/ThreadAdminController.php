@@ -133,6 +133,17 @@ class ThreadAdminController extends Controller
     public function thread(Request $request)
     {
         $msg = "スレッド管理";
+        if($request->isMethod('POST'))
+        {
+            // スレッド・レス削除
+            $param = [
+                'id' => $request->id
+            ];
+            DB::delete('DELETE  `bbs_threads` , `bbs_responses`
+            from bbs_threads LEFT JOIN bbs_responses ON bbs_threads.id = bbs_responses.thread_id
+            where bbs_threads.id =:id', $param);
+            $msg = $request->thread.'を削除しました';
+        }
 
         $threads = DB::table('bbs_boards')
             ->leftJoin('bbs_threads', 'bbs_boards.id', '=', 'bbs_threads.board_id')
@@ -140,10 +151,10 @@ class ThreadAdminController extends Controller
             ->get();
         $threads = json_decode(json_encode($threads), true);
 
-
-
-
         return view('thread_admin.thread',compact('threads', 'msg'));
     }
+    public function thread_res(Request $request)
+    {
 
+    }
 }

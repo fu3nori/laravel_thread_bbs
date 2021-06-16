@@ -54,4 +54,7 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('/thread_admin/thread' , 'ThreadAdminController@thread');
     Route::post('/thread_admin/thread' , 'ThreadAdminController@thread');
 
+    Route::get('/thread_admin/thread_res' , 'ThreadAdminController@thread_res');
+    Route::post('/thread_admin/thread_res' , 'ThreadAdminController@thread_res');
+
 });
