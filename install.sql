@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2021-05-29 09:54:07
+-- 生成日時: 2021-06-16 15:19:13
 -- サーバのバージョン： 10.4.14-MariaDB
 -- PHP のバージョン: 7.4.9
 
@@ -20,21 +20,94 @@ SET time_zone = "+00:00";
 --
 -- データベース: `laravel-test`
 --
+CREATE DATABASE IF NOT EXISTS `laravel-thread-bbs` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `laravel-test`;
 
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `articles`
+-- テーブルの構造 `bbs_boards`
 --
 
-CREATE TABLE `articles` (
+CREATE TABLE `bbs_boards` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `name` text NOT NULL,
-  `text` text NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `board` varchar(255) NOT NULL,
+  `sort` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='投稿';
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- テーブルのデータのダンプ `bbs_boards`
+--
+
+INSERT INTO `bbs_boards` (`id`, `category_id`, `board`, `sort`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, '運営', 0, '2021-05-31 07:39:44', '2021-05-31 07:39:44', NULL),
+(2, 1, '総合雑談', 0, '2021-05-31 07:40:10', '2021-05-31 07:40:10', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `bbs_categorys`
+--
+
+CREATE TABLE `bbs_categorys` (
+  `id` int(11) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `sort` int(11) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- テーブルのデータのダンプ `bbs_categorys`
+--
+
+INSERT INTO `bbs_categorys` (`id`, `category`, `sort`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '総合情報', 0, '2021-06-16 22:17:07', '2021-06-16 22:17:07', NULL),
+(2, '趣味', 0, '2021-06-16 22:17:07', '2021-06-16 22:17:07', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `bbs_responses`
+--
+
+CREATE TABLE `bbs_responses` (
+  `id` int(11) NOT NULL,
+  `thread_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `response` text NOT NULL,
+  `image1` varchar(255) DEFAULT NULL,
+  `image2` varchar(255) DEFAULT NULL,
+  `thumb1` mediumtext DEFAULT NULL,
+  `thumb2` mediumtext DEFAULT NULL,
+  `ip` varchar(64) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `bbs_threads`
+--
+
+CREATE TABLE `bbs_threads` (
+  `id` int(11) NOT NULL,
+  `board_id` int(11) NOT NULL,
+  `thread` varchar(255) NOT NULL,
+  `ip` varchar(64) NOT NULL,
+  `writes` int(10) UNSIGNED DEFAULT 1,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -117,10 +190,35 @@ CREATE TABLE `users` (
 --
 
 --
--- テーブルのインデックス `articles`
+-- テーブルのインデックス `bbs_boards`
 --
-ALTER TABLE `articles`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `bbs_boards`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `board` (`board`),
+  ADD KEY `sort` (`sort`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- テーブルのインデックス `bbs_categorys`
+--
+ALTER TABLE `bbs_categorys`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `category` (`category`),
+  ADD KEY `sort` (`sort`);
+
+--
+-- テーブルのインデックス `bbs_responses`
+--
+ALTER TABLE `bbs_responses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `thread_id` (`thread_id`);
+
+--
+-- テーブルのインデックス `bbs_threads`
+--
+ALTER TABLE `bbs_threads`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `board_id` (`board_id`);
 
 --
 -- テーブルのインデックス `failed_jobs`
@@ -153,9 +251,27 @@ ALTER TABLE `users`
 --
 
 --
--- テーブルのAUTO_INCREMENT `articles`
+-- テーブルのAUTO_INCREMENT `bbs_boards`
 --
-ALTER TABLE `articles`
+ALTER TABLE `bbs_boards`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- テーブルのAUTO_INCREMENT `bbs_categorys`
+--
+ALTER TABLE `bbs_categorys`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- テーブルのAUTO_INCREMENT `bbs_responses`
+--
+ALTER TABLE `bbs_responses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- テーブルのAUTO_INCREMENT `bbs_threads`
+--
+ALTER TABLE `bbs_threads`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
