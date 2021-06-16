@@ -107,10 +107,20 @@ class ThreadAdminController extends Controller
             $param = [
                 'id' => $request->id
             ];
-            DB::delete('DELETE `bbs_boards` , `bbs_threads` , `bbs_responses`
-            from bbs_boards LEFT JOIN bbs_threads ON bbs_boards.id = bbs_threads.board_id
-            RIGHT JOIN bbs_responses ON bbs_responses.thread_id = bbs_threads.id
-            where bbs_boards.id =:id', $param);
+            // 板だけを削除
+            $thread_count = DB::table('bbs_threads')->where('board_id',$request->id )->count();
+            if ($thread_count ==0)
+            {
+                DB::table('bbs_boards')->where('id',$request->id)->delete();
+            } else {
+                // スレッドと板を削除
+                DB::delete('DELETE `bbs_boards` , `bbs_threads` , `bbs_responses`
+                from bbs_boards LEFT JOIN bbs_threads ON bbs_boards.id = bbs_threads.board_id
+                RIGHT JOIN bbs_responses ON bbs_responses.thread_id = bbs_threads.id
+                where bbs_boards.id =:id', $param);
+            }
+
+
 
             /**
             DELETE `bbs_boards` , `bbs_threads` , `bbs_responses`
