@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel-Thread-BBS
                 </div>
 
                 <div class="links">
@@ -93,8 +93,7 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a> -->
-                    <a href="start/view">MiniBBS DEMO</a>
-                    <a href="category">THREAD BBS DEMO</a>
+                    <a href="category">THREAD BBS</a>
                 </div>
             </div>
         </div>
