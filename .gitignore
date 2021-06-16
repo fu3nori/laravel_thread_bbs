@@ -4,3 +4,9 @@
 .idea/php.xml
 .idea/workspace.xml
 
+.idea/deployment.xml
+.idea/laravel_thread_bbs.iml
+.idea/modules.xml
+.idea/sshConfigs.xml
+.idea/webServers.xml
+.idea/commandlinetools/Laravel_2021_06_17_3_00.xml
