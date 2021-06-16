@@ -50,7 +50,6 @@ class ThreadAdminController extends Controller
         {
             // カテゴリーIDバリデーション
             $validate_rule = [
-                'category' => 'required',
                 'id' => 'required','size:255','integer',
             ];
             $this->validate($request,$validate_rule);
