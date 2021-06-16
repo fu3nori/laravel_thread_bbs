@@ -1,20 +1,26 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-# Laravel CRUD処理テンプレート(MINI BBS)
-Laravelの基本的なCRUDをMINI BBS形式で実装したテンプレートです。
-初心者の方はこのテンプレートを見ながらチュートリアルが実施できます。
-
-## テンプレート制作
+# Laravel 画像投稿スレッド式掲示板システム
+Laravelの基本的なCRUDをMINI BBS形式で実装しました。
+これによって、ふたばちゃんねるのようなスレッド式画像掲示板を構築できます。
+<br>
+また、管理人権限を持つアカウントによって掲示板は5chのようにカテゴリ、カテゴリ配下掲示板を編集し、複数用意出来ます。
+カテゴリ、掲示板の新規作成は勿論、カテゴリ、掲示板、個別のレスの削除も可能です。
+## 開発
 Fu3nori Usu1
 
 ##　利用方法
 <p>ソースコード一式を開発環境にデプロイし、laravelのホーム画面が表示される事を確認します。</p>
-<p>laravel-test.sqlを任意のmysqlサーバに読み込ませ、DBを構築します。</p>
-<p>.envで利用するDBを設定します。</p>
+<p>install.sqlを任意のmysqlサーバに読み込ませ、DBを構築します。<br>
+<b>※デフォルトで作成されるDBは"laravel-thread-bbs"となっています。</b>
+</p>
+<p>.env、/config/app.phpで利用するDBを設定します。</p>
 <p>ホーム画面からRegisterをクリックし、ユーザー登録画面に遷移し、ドロップダウンリストで管理者を選び、必要事項を入力してからユーザー登録して下さい。<BR>なお、管理者登録が出来るのは最初の1回だけですのでご注意ください。</p>
 <p>クローンしたディレクトリ名を変更した場合、/public/.htaccessのRewriteBaseを変更したディレクトリ名に修正して下さい<br>
 ex:RewriteBase /laravel_thread_bbs/ → /foobar/
-
+<p>初期のインストールパスはgit cloneを実行したパス/publicとなっています。<br>
+/publicを外したい場合は任意のパスから/publicへシンボリックリンクを張って下さい
+</p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
