@@ -1,7 +1,7 @@
 @extends('layouts.board')
 @section('title', 'カテゴリー選択')
 @section('content')
-
+    <h2><a href="../">トップに戻る</a></h2>
     <h1>カテゴリー選択</h1>
     @foreach($categorys as $category)
 

@@ -8,6 +8,7 @@
 @section('title', $thread['thread'] )
 
 @section('content')
+
 <h1>{{$thread['thread']}}　{{$thread['writes']}}レス</h1>
 
 <h2><a href="{{ action('BoardController@index',$thread['board_id']) }}">掲示板に戻る</a>
