@@ -19,6 +19,15 @@ class BoardController extends Controller
     //
     public function index($id){
         // 板名取得
+        // 板が無かったら404
+        $count = DB::table('bbs_boards')->where('id', $id)->count();
+        if($count ==0)
+        {
+            return \App::abort(404);
+            exit;
+        }
+
+
         $board = DB::table('bbs_boards')
             ->select('board')
             ->where('id',$id)
