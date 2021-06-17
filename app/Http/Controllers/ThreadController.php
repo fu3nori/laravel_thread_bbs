@@ -16,6 +16,14 @@ class ThreadController extends Controller
     //
     public function list($id)
     {
+        // スレッドが無かったら404
+        $count = DB::table('bbs_threads')->where('board_id', $id)->count();
+        if($count ==0)
+        {
+            return \App::abort(404);
+            exit;
+        }
+
         $threads = DB::table('bbs_threads')
             ->where('board_id',$id)
             ->orderBy('updated_at', 'desc')
@@ -26,6 +34,14 @@ class ThreadController extends Controller
 
     public function view($id)
     {
+        // スレッドが無かったら404
+        $count = DB::table('bbs_threads')->where('id', $id)->count();
+        if($count ==0)
+        {
+            return \App::abort(404);
+            exit;
+        }
+
         // スレッドタイトル・カウント取得
         $thread = DB::table('bbs_threads')
             ->where('id', $id)

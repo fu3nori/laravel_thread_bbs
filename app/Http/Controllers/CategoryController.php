@@ -21,8 +21,15 @@ class CategoryController extends Controller
     }
 
     public function view($id){
-        $boards = Board::where("category_id", $id)->OrderBy('sort', 'asc')->get();
+        // 板が無かったら404
+        $count = DB::table('bbs_boards')->where('category_id', $id)->count();
+        if($count ==0)
+        {
+            return \App::abort(404);
+            exit;
+        }
 
+        $boards = Board::where("category_id", $id)->OrderBy('sort', 'asc')->get();
         return view('/category/view',compact('boards'));
     }
 
