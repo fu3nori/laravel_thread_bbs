@@ -24,8 +24,8 @@ Fu3nori Usu1
 </p>
 <p>.envで利用するDBを設定します。</p>
 <p>ホーム画面からRegisterをクリックし、ユーザー登録画面に遷移し、ドロップダウンリストで管理者を選び、必要事項を入力してからユーザー登録して下さい。<BR>なお、管理者登録が出来るのは最初の1回だけですのでご注意ください。</p>
-<p>クローンしたディレクトリ名を変更した場合、/public/.htaccessのRewriteBaseを変更したディレクトリ名に修正して下さい<br>
-ex:RewriteBase /laravel_thread_bbs/ → /foobar/
+<p>/public/.htaccessのRewriteBaseはローカルサーバ用の設定の為、この行は削除してください。<br>
+ex:RewriteBase /laravel_thread_bbs/ → 
 <p>初期のインストールパスはgit cloneを実行したパス/publicとなっています。<br>
 /publicを外したい場合は任意のパスから/publicへシンボリックリンクを張って下さい
 </p>
