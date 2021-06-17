@@ -1,13 +1,12 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 # Laravel 画像投稿スレッド式掲示板システム
-Laravelの基本的なCRUDをMINI BBS形式で実装しました。
 これによって、ふたばちゃんねるのようなスレッド式画像掲示板を構築できます。
 <br>
 また、管理人権限を持つアカウントによって掲示板は5chのようにカテゴリ、カテゴリ配下掲示板を編集し、複数用意出来ます。
 カテゴリ、掲示板の新規作成は勿論、カテゴリ、掲示板、個別のレスの削除も可能です。
 ## 開発
-Fu3nori Usu1
+Fu3nori Has1dume
 
 ##　利用方法
 <p>ソースコード一式を開発環境にデプロイし、laravelのホーム画面が表示される事を確認します。</p>
