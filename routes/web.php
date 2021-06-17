@@ -16,6 +16,7 @@ use App\Http\Middleware\AdminMiddleware;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/start', 'StartController@index');
 Route::post('/start', 'StartController@post');
 Route::get('/start/view', 'StartController@view');

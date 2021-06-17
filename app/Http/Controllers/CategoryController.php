@@ -15,9 +15,12 @@ class CategoryController extends Controller
 {
     //
     public function index(){
+        // 現在のURLを取得し、トップページへのリンクを生成
+        $url= request()->fullUrl();
+        $url=str_replace('category', '',$url);
 
         $categorys = Category::OrderBy('sort', 'asc')->get();
-        return view('/category/index',compact('categorys'));
+        return view('/category/index',compact('categorys','url'));
     }
 
     public function view($id){
