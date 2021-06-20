@@ -21,7 +21,7 @@ Fu3nori Has1dume
 <p>install.sqlを任意のmysqlサーバに読み込ませ、DBを構築します。<br>
 <b>※デフォルトで作成されるDBは"laravel-thread-bbs"となっています。</b>
 </p>
-<p>.envで利用するDBを設定します。</p>
+<p>.envで利用するDBとメールサーバを設定します。</p>
 <p>ホーム画面からRegisterをクリックし、ユーザー登録画面に遷移し、ドロップダウンリストで管理者を選び、必要事項を入力してからユーザー登録して下さい。<BR>なお、管理者登録が出来るのは最初の1回だけですのでご注意ください。</p>
 <p>/public/.htaccessのRewriteBaseはローカルサーバ用の設定の為、この行は削除してください。<br>
 ex:RewriteBase /laravel_thread_bbs/ → 
