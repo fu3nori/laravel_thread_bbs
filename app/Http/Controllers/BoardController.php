@@ -64,7 +64,7 @@ class BoardController extends Controller
         $validate_rule = [
             'thread' => 'required','size:255',
             'name' => 'required','size:255',
-            'email' => 'present','email:strict,dns,spoof',
+            'email' => 'nullable|email:strict,dns,spoof',
             'response' => 'required','size:2048',
             'ip' => 'required','ip',
             'image1' => 'image|file|mimes:jpeg,png,jpg,gif|max:5120|dimensions:max_width=1600,max_height=1440',
@@ -123,7 +123,7 @@ class BoardController extends Controller
         $validate_rule = [
             'thread_id' => 'required',
             'name' => 'required','size:255',
-            'email' => 'present','email:strict,dns,spoof',
+            'email' => 'nullable|email:strict,dns,spoof',
             'response' => 'required','size:2048',
             'ip' => 'required','ip',
             'image1' => 'image|file|mimes:jpeg,png,jpg,gif|max:5120|dimensions:max_width=1600,max_height=1440',
