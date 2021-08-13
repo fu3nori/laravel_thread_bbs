@@ -24,6 +24,7 @@ class ThreadController extends Controller
             exit;
         }
 
+
         $threads = DB::table('bbs_threads')
             ->where('board_id',$id)
             ->orderBy('updated_at', 'desc')
@@ -32,7 +33,7 @@ class ThreadController extends Controller
         return view('/thread/list', compact('threads'));
     }
 
-    public function view($id)
+    public function view($id, $bbs_responses_id=null)
     {
         // スレッドが無かったら404
         $count = DB::table('bbs_threads')->where('id', $id)->count();
@@ -49,11 +50,26 @@ class ThreadController extends Controller
             ->first();
         $thread = json_decode(json_encode($thread), true);
 
-        // レスポンス取得
-        $responses = DB::table('bbs_responses')
-            ->where('thread_id', $id)
-            ->get();
-        $responses = json_decode(json_encode($responses), true);
+        // レス番指定
+        if ($bbs_responses_id != null){
+            $responses = DB::table('bbs_responses')
+                ->where('id', $bbs_responses_id)
+                ->get();
+            $responses = json_decode(json_encode($responses), true);
+
+        } else {
+            // レスポンス取得
+            $responses = DB::table('bbs_responses')
+                ->where('thread_id', $id)
+                ->get();
+            $responses = json_decode(json_encode($responses), true);
+
+        }
+
+
+
+
+
         return view('/thread/view', compact('thread','responses'));
     }
 
