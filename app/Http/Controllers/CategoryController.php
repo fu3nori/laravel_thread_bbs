@@ -18,8 +18,10 @@ class CategoryController extends Controller
         // 現在のURLを取得し、トップページへのリンクを生成
         $url= request()->fullUrl();
         $url=str_replace('category', '',$url);
-
         $categorys = Category::OrderBy('sort', 'asc')->get();
+
+
+
         return view('/category/index',compact('categorys','url'));
     }
 
